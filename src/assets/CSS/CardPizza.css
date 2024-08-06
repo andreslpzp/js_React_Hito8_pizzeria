@@ -1,0 +1,22 @@
+.card-pizza {
+    border: 1px solid #ccc;
+    box-shadow: 2px 2px 10px 0px rgba(0,0,0,0.3);
+    border-radius: 10px;
+    width: 350px;
+    margin: 20px;
+    padding: 20px;
+    text-align: center;
+}
+.card-pizza img {
+    width: 100%;
+    height: auto;
+}
+
+ul{
+    list-style-type: none;
+    padding-right: 40px;
+}
+
+img{
+    background-color: white;
+}
