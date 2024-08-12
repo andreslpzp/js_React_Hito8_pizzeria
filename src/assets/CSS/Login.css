@@ -1,0 +1,106 @@
+/* Estilos generales */
+body {
+    background-color: #333; /* Fondo gris oscuro */
+    color: #f0f0f0; /* Texto en un tono gris claro */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Contenedor principal */
+.container {
+    margin-top: 50px;
+    text-align: center;
+}
+
+/* Estilos del card */
+.card {
+    background-color: #444; /* Fondo gris medio */
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Estilos del título y el subtítulo */
+.card-title {
+    color: #ffffff;
+}
+
+h1, p {
+    color: #f0f0f0;
+}
+
+/* Centrar los elementos del formulario */
+.card-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.form-group {
+    width: 100%;
+    max-width: 400px; /* Limita el ancho máximo */
+    margin-bottom: 15px; /* Espacio entre los campos */
+}
+
+/* Estilos de los campos del formulario */
+.form-group label {
+    color: #ddd;
+    font-weight: bold;
+}
+
+.form-control {
+    background-color: #555; /* Fondo gris oscuro para los campos */
+    border: 1px solid #666; /* Borde gris oscuro */
+    border-radius: 5px;
+    color: #f0f0f0; /* Texto gris claro */
+    padding: 10px;
+    width: 100%; /* Ocupa todo el ancho disponible */
+}
+
+.form-control:focus {
+    border-color: #888; /* Cambio de borde al enfocar */
+    outline: none;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+/* Estilos del botón */
+.btn-outline-warning {
+    background-color: #222; /* Fondo negro */
+    border: 2px solid #f0f0f0; /* Borde gris claro */
+    color: #f0f0f0; /* Texto gris claro */
+    border-radius: 5px;
+    height: 60px;
+    width: 150px;
+    padding: 15px; /* Aumenta el tamaño del botón */
+    font-size: 1.2em; /* Incrementa el tamaño del texto */
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-outline-warning:hover {
+    background-color: #f0f0f0; /* Fondo gris claro */
+    color: #222; /* Texto negro */
+}
+
+/* Estilo del mensaje */
+p.text-center {
+    color: #f0f0f0;
+    margin-top: 20px;
+}
+
+/* Responive design */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+    }
+
+    .form-group {
+        max-width: 100%;
+    }
+
+    .btn-outline-warning {
+        width: 100%;
+        padding: 15px;
+    }
+}
