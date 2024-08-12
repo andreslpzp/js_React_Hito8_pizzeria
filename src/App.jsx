@@ -9,7 +9,7 @@ function App() {
   return (
     <div>
       <Navbar />
-      <Register />
+      {/* <Register /> */}
       <Login />
       {/* <Home /> */}
       <Footer />
