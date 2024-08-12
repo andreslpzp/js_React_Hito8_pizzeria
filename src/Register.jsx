@@ -26,7 +26,7 @@ const Login = () => {
             <h1>Bienvenido</h1>
             <div className="card">
                 <div className="card-body">
-                    <h2>Inicio de Sesión</h2>
+                    <h2>Ingresa tu correo y contraseña</h2>
                     <form onSubmit={handleSubmit}>
                         <div className="form-group">
                             <label>Email:</label>
@@ -49,7 +49,7 @@ const Login = () => {
                                     />
                         </div>
                         <div className='text-center'>
-                            <button type="submit" className="btn btn-outline-warning mt-3 fw-bold">Iniciar Sesión</button>
+                            <button type="submit" className="btn btn-outline-warning mt-3 fw-bold">Registrarme</button>
                         </div>
                     </form>
                 </div>
