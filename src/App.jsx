@@ -1,8 +1,9 @@
 import React from 'react';
 import Navbar from './Navbar';
-import Register from './Register';
-import Login from './Login';
-// import Home from './Home'; 
+// import Register from './Register';
+// import Login from './Login';
+import Home from './Home';
+import Cart from './Cart'; 
 import Footer from './Footer';
 
 function App() {
@@ -10,8 +11,9 @@ function App() {
     <div>
       <Navbar />
       {/* <Register /> */}
-      <Login />
-      {/* <Home /> */}
+      {/* <Login /> */}
+      <Home />
+      <Cart />
       <Footer />
     </div>
   );

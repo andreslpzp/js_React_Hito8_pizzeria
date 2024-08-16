@@ -6,7 +6,7 @@ function Header() {
     <div className="header">
       <img className="header-image" src="../src/assets/img/fondo_restaurant.jpg" alt="Fondo" />
       <div className="header-content">
-        <h1>El Noctámbulo del Huerto</h1>
+        <h1>Pizzería Napoli</h1>
       </div>
     </div>
   );

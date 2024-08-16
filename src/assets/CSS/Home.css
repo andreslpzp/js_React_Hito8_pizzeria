@@ -1,0 +1,55 @@
+.home {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.card {
+    width: 30%; /* Ajusta el ancho según tus necesidades */
+    height: 45vh; /* Aumenta la altura de la tarjeta */
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+}
+
+.card img {
+    width: 100%;
+    height: 60%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.card-description {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.card-content {
+    margin-top: 10px;
+    height: calc(100% - 150px); /* Ajusta el valor según la altura de la imagen y otros elementos */
+    overflow-y: auto;
+}
+
+.card-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.card-description {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.card-ingredients {
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+}
+
+.card-price {
+    font-size: 1rem;
+    font-weight: bold;
+}
