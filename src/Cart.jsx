@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import pizzas from './Pizzas'; // Asegúrate de que la ruta sea correcta
+import pizzas from './Pizzas.js'; // Asegúrate de que la ruta sea correcta
 
 function Cart() {
   const [cartItems, setCartItems] = useState([]);
