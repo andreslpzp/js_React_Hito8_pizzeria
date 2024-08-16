@@ -1,50 +1,54 @@
 import React, { useState } from 'react';
-import PizzaCart from './PizzaCart'; // Correct component import with uppercase
-import pizzas from './Pizzas'; // Ensure this matches the actual file name
-import '../src/assets/CSS/Cart.css'; // Import your CSS file
+import PizzaCart from './PizzaCart';
+import pizzas from './Pizzas.js';
+import '../src/assets/CSS/Cart.css';
 
 function Cart() {
-  const [cartItems, setCartItems] = useState(
-    pizzas.map((pizza) => ({ ...pizza, quantity: 0 }))
-  );
+  const [selectedPizzas, setSelectedPizzas] = useState([]);
 
-  const addProduct = (id) => {
-    setCartItems((prevItems) =>
-      prevItems.map((item) =>
-        item.id === id ? { ...item, quantity: item.quantity + 1 } : item
-      )
-    );
+  const handleQuantityChange = (pizzaId, newQuantity) => {
+    const pizza = pizzas.find((p) => p.id === pizzaId);
+
+    setSelectedPizzas((prevSelectedPizzas) => {
+      if (newQuantity === 0) {
+        return prevSelectedPizzas.filter((p) => p.id !== pizzaId);
+      } else {
+        const pizzaExists = prevSelectedPizzas.find((p) => p.id === pizzaId);
+        if (pizzaExists) {
+          return prevSelectedPizzas.map((p) =>
+            p.id === pizzaId ? { ...p, quantity: newQuantity } : p
+          );
+        } else {
+          return [...prevSelectedPizzas, { ...pizza, quantity: newQuantity }];
+        }
+      }
+    });
   };
 
-  const removeProduct = (id) => {
-    setCartItems((prevItems) =>
-      prevItems.map((item) =>
-        item.id === id && item.quantity > 0
-          ? { ...item, quantity: item.quantity - 1 }
-          : item
-      )
-    );
+  const calculateTotal = () => {
+    return selectedPizzas.reduce((total, pizza) => total + pizza.price * pizza.quantity, 0);
   };
-
-  const total = cartItems.reduce(
-    (acc, item) => acc + item.quantity * item.price,
-    0
-  );
 
   return (
     <div className="cart">
-      <h1>Carrito de Compras</h1>
+      <h1 className="titulo">Selecciona las pizzas que deseas para agregarlas al carrito</h1>
       <div className="pizza-list">
-        {cartItems.map((pizza) => (
-          <PizzaCart // Make sure to use the corrected component name here
-            key={pizza.id} 
-            pizza={pizza} 
-            addProduct={addProduct} 
-            removeProduct={removeProduct} 
-          />
+        {pizzas.map((pizza) => (
+          <PizzaCart key={pizza.id} pizza={pizza} onQuantityChange={handleQuantityChange} />
         ))}
       </div>
-      <h2>Total: ${total}</h2>
+
+      <div className="seccion_pago">
+        <h2>Tu pedido:</h2>
+        <ul>
+          {selectedPizzas.map((pizza) => (
+            <li key={pizza.id}>{pizza.name}: {pizza.quantity}</li>
+          ))}
+        </ul>
+
+        <h3>Total a pagar: ${calculateTotal()}</h3>
+        <button className="boton_pago">Pagar</button>
+      </div>
     </div>
   );
 }

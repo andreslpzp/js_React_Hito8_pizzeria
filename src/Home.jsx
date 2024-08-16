@@ -1,6 +1,6 @@
 import React from 'react';
-import CardPizza from './CardPizza'; // Asegúrate de importar correctamente el componente CardPizza
-import pizzas from './Pizzas.js'; // Asegúrate de importar correctamente el array de pizzas
+import CardPizza from './CardPizza'; 
+import pizzas from './Pizzas.js'; 
 import '../src/assets/CSS/Home.css';
 import fondo_restaurant from './assets/img/fondo_restaurant.jpg';
 
