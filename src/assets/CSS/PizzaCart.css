@@ -1,0 +1,28 @@
+.card {
+    width: 250px;
+    height: 350px;
+}
+
+.pizza-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+@media (min-width: 1200px) {
+    .card-container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1199px) {
+    .card-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
