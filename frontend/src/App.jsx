@@ -1,19 +1,21 @@
 import React from 'react';
 import Navbar from './Navbar';
+import Home from './Home';
 // import Register from './Register';
 // import Login from './Login';
-// import Home from './Home';
-import Cart from './Cart';
+// import Cart from './Cart';
+import Pizza from './Pizza';
 import Footer from './Footer';
 
 function App() {
   return (
     <div>
       <Navbar />
+      <Home />
       {/* <Register /> */}
       {/* <Login /> */}
-      {/* <Home /> */}
-      <Cart />
+      {/* <Cart /> */}
+      <Pizza />
       <Footer />
     </div>
   );

@@ -1,0 +1,72 @@
+.pizza-detail {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px;
+    max-width: 400px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+}
+
+.pizza-detail:hover {
+    transform: translateY(-5px);
+}
+
+.pizza-name {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.pizza-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.pizza-price {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.pizza-ingredients {
+    margin-bottom: 15px;
+}
+
+.pizza-ingredients ul {
+    padding-left: 20px;
+}
+
+.pizza-ingredients li {
+    margin-bottom: 5px;
+    font-size: 16px;
+}
+
+.pizza-description {
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+.add-to-cart-button {
+    background-color: #e74c3c;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: block;
+    width: 100%;
+    text-align: center;
+    font-size: 16px;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.add-to-cart-button:hover {
+    background-color: #c0392b;
+}
