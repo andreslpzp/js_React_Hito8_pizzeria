@@ -1,22 +1,54 @@
 .navbar {
-    display: flex;
-    justify-content: space-between;
-    height: 50px;
-    background-color: black;
-  }
-  
-  .navbar-left {
-    display: flex;
-    align-items: center;
-  }
-  
-  .navbar-right {
-    display: flex;
-    align-items: center;
-  }
-
-button{
-  background-color: white;
-  height: 40px;
-  width: 120px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 60px;
+  background-color: #8d8a8a; /* Gris claro */
+  padding: 0 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+  color: white;
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+  color: white;
+}
+
+.navbar a {
+  color: white;
+  text-decoration: none;
+  margin: 0 15px;
+  font-weight: bold;
+}
+
+.navbar a:hover {
+  text-decoration: underline;
+}
+
+button {
+  background-color: #444; /* Un tono gris oscuro para los botones */
+  color: white;
+  height: 40px;
+  width: 140px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 15px;
+}
+
+button:hover {
+  background-color: #666; /* Un tono gris más claro en hover */
+}
+
+.navbar-right .total {
+  margin-right: 20px;
+  font-size: 18px;
+  font-weight: bold;
+}
+

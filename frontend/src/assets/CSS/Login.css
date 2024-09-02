@@ -10,7 +10,7 @@ body {
 /* Contenedor principal */
 .container {
     margin-top: 50px;
-    text-align: center;
+    text-align: center; /* Centrar el contenedor */
 }
 
 /* Estilos del card */
@@ -104,3 +104,5 @@ p.text-center {
         padding: 15px;
     }
 }
+
+

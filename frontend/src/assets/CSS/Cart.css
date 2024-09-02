@@ -10,7 +10,7 @@
     max-width: 180px; /* También puedes definir un ancho máximo */
     margin: 20px auto; /* Esto centrará el div horizontalmente y le dará un margen superior e inferior */
     padding: 20px;
-    background-color: #f9f9f9; /* Cambia el color de fondo según lo prefieras */
+    background-color: #747171; /* Cambia el color de fondo según lo prefieras */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Añade sombra para que el div resalte */
 }
 
