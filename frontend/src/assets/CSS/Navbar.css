@@ -3,6 +3,7 @@
   justify-content: space-between;
   align-items: center;
   height: 60px;
+  width: calc(100%-20px);
   background-color: #8d8a8a; /* Gris claro */
   padding: 0 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);

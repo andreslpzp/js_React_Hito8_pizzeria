@@ -23,7 +23,6 @@ const Login = () => {
 
     return (
         <div className="container">
-            <h1>Bienvenido</h1>
             <div className="card">
                 <div className="card-body">
                     <h2>Inicio de Sesión</h2>
