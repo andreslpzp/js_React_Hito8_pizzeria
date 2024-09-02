@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import PizzaCart from './PizzaCart';
-import pizzas from './Pizzas.js';
-import '../src/assets/CSS/Cart.css';
+import PizzaCart from '../Components/PizzaCart';
+import pizzas from '../Pizzas';
+import '../assets/CSS/Cart.css';
 
 function Cart() {
   const [selectedPizzas, setSelectedPizzas] = useState([]);

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../src/assets/CSS/PizzaCart.css';
+import '../assets/CSS/PizzaCart.css';
 
 function PizzaCart({ pizza, onQuantityChange }) {
   const [quantity, setQuantity] = useState(0); // Initial quantity set to 0

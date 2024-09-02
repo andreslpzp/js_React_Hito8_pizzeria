@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Pizza from './Pizza'; 
-import '../src/assets/CSS/Home.css';
-import fondo_restaurant from './assets/img/fondo_restaurant.jpg';
+import '../assets/CSS/Home.css';
+import fondo_restaurant from '../assets/img/fondo_restaurant.jpg';
 
 function Home() {
   const [pizzas, setPizzas] = useState([]);

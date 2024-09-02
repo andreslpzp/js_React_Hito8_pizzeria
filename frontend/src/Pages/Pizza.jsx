@@ -1,5 +1,5 @@
 import React from 'react';
-import './assets/CSS/Pizza.css';
+import '../assets/CSS/Pizza.css';
 
 const Pizza = ({ pizza }) => {
     if (!pizza) {
