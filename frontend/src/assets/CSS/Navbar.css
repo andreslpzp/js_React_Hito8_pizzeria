@@ -3,10 +3,15 @@
   justify-content: space-between;
   align-items: center;
   height: 60px;
-  width: calc(100%-20px);
+  width: calc(100% - 20px); /* Corrección de la fórmula del width */
   background-color: #8d8a8a; /* Gris claro */
   padding: 0 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: fixed; /* Fija el navbar en la parte superior */
+  top: 0; /* Pegado al borde superior */
+  left: 0;
+  right: 0;
+  z-index: 1000; /* Asegura que el navbar esté sobre otros elementos */
 }
 
 .navbar-left {
@@ -52,4 +57,10 @@ button:hover {
   font-size: 18px;
   font-weight: bold;
 }
+
+/* Agrega margen al contenido para evitar que se superponga con el navbar */
+.main-content {
+  margin-top: 80px; /* Ajusta según la altura del navbar */
+}
+
 

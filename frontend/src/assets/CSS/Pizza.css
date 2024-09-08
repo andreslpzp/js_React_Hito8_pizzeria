@@ -1,3 +1,11 @@
+.pizza-name {
+    color: black;
+}
+
+.pizza-price {
+    color: black;
+}
+
 .pizza-detail {
     background-color: #fff;
     border: 1px solid #ddd;
@@ -7,6 +15,7 @@
     max-width: 400px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s ease-in-out;
+    color: black;
 }
 
 .pizza-detail:hover {
@@ -36,10 +45,12 @@
 
 .pizza-ingredients {
     margin-bottom: 15px;
+    text-align: center; /* Center the ingredients */
 }
 
 .pizza-ingredients ul {
-    padding-left: 20px;
+    padding-left: 0; /* Remove default left padding for centering */
+    list-style-type: none; /* Remove bullet points for a cleaner look */
 }
 
 .pizza-ingredients li {
@@ -51,22 +62,42 @@
     font-size: 14px;
     line-height: 1.5;
     margin-bottom: 20px;
+    color: black;
+    text-align: justify; /* Justify the description text */
 }
 
-.add-to-cart-button {
-    background-color: #e74c3c;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
+.quantity-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Center the quantity controls horizontally */
+    gap: 10px; /* Add some space between the buttons and quantity display */
+    margin-top: 15px;
+}
+
+.quantity-button {
+    background-color: #776363;
+    border: 1px solid #ccc;
+    padding: 10px; /* Adjust padding for better appearance */
+    font-size: 12px;
     cursor: pointer;
-    display: block;
-    width: 100%;
-    text-align: center;
-    font-size: 16px;
-    transition: background-color 0.2s ease-in-out;
+    color: white;
+    display: flex;
+    justify-content: center; /* Center the text inside the button */
+    align-items: center;
+    width: 100px; /* Adjust width to fit the text */
 }
 
-.add-to-cart-button:hover {
-    background-color: #c0392b;
+.quantity-button:disabled {
+    opacity: 0.8;
+    cursor: not-allowed;
 }
+
+.quantity-display {
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    display: flex;
+    justify-content: center; /* Center the quantity display horizontally */
+}
+
+

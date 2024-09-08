@@ -17,7 +17,7 @@
     margin: 10px 0;
 }
 
-.card .quantity-controls {
+.card .quantity-controls-cart {
     display: flex;
     align-items: center;
     gap: 5px; /* Adjust gap as needed */
@@ -47,6 +47,6 @@
     }
 }
 
-.quantity-controls {
+.quantity-controls-cart {
     width: 100px;
 }

@@ -3,23 +3,18 @@ import { CartContext } from '../Context/CartContext';
 import '../assets/CSS/Pizza.css';
 
 const Pizza = ({ pizza }) => {
-  const { cart, addToCart, removeFromCart } = useContext(CartContext);
+    const { cart, addToCart, removeFromCart } = useContext(CartContext);
   
   // Check if the pizza is already in the cart
-  const pizzaInCart = cart.find(p => p.id === pizza.id);
+  const pizzaInCart = cart.find(p => p.id === pizza.id) || {};
+  const { quantity = 0 } = pizzaInCart; // Default to 0 if pizza is not in the cart
 
   const handleAddToCart = () => {
-    if (pizzaInCart) {
-      // Update quantity if pizza already exists in the cart
-      addToCart({ ...pizza, quantity: (pizzaInCart.quantity || 0) + 1 });
-    } else {
-      // Add new pizza to the cart
-      addToCart({ ...pizza, quantity: 1 });
-    }
+    addToCart({ ...pizza, quantity: quantity + 1 });
   };
 
   const handleRemoveFromCart = () => {
-    if (pizzaInCart) {
+    if (quantity > 0) {
       removeFromCart(pizza.id);
     }
   };
@@ -38,19 +33,24 @@ const Pizza = ({ pizza }) => {
         </ul>
       </div>
       <p className="pizza-description">{pizza.desc}</p>
-      <button className="add-to-cart-button" onClick={handleAddToCart}>
-        {pizzaInCart ? `Añadida al carrito (${pizzaInCart.quantity})` : 'Añadir al carrito'}
-      </button>
-      {pizzaInCart && (
-        <button className="remove-from-cart-button" onClick={handleRemoveFromCart}>
-          Eliminar del carrito
+
+      {/* Quantity Controls: Left: remove, Center: quantity, Right: add */}
+      <div className="quantity-controls">
+        <button className="quantity-button" onClick={handleRemoveFromCart} disabled={quantity === 0}>
+          - Quitar del carrito
         </button>
-      )}
+        <span className="quantity-display">{quantity}</span>
+        <button className="quantity-button" onClick={handleAddToCart}>
+          + Agregar al carrito
+        </button>
+      </div>
     </div>
   );
 };
 
 export default Pizza;
+
+
 
 
 

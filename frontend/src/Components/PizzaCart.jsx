@@ -9,9 +9,10 @@ function PizzaCart({ pizza, quantity, onQuantityChange }) {
   }, [quantity]);
 
   const handleQuantityChange = (delta) => {
-    const newQuantity = Math.max(0, localQuantity + delta); // Ensure minimum quantity is 0
+    // Ensure the new quantity does not go below 0
+    const newQuantity = Math.max(0, localQuantity + delta);
     setLocalQuantity(newQuantity);
-    onQuantityChange(pizza.id, newQuantity); // Pass pizza ID and new quantity to callback
+    onQuantityChange(pizza.id, newQuantity); // Pass the updated quantity to the parent component
   };
 
   return (
@@ -24,9 +25,11 @@ function PizzaCart({ pizza, quantity, onQuantityChange }) {
         ))}
       </ul>
       <p>Precio: ${pizza.price}</p>
-      <div className="quantity-controls">
+      <div className="quantity-controls-cart">
+        {/* The button will subtract 1 unit when clicked */}
         <button onClick={() => handleQuantityChange(-1)}>-</button>
         <span>{localQuantity}</span>
+        {/* The button will add 1 unit when clicked */}
         <button onClick={() => handleQuantityChange(1)}>+</button>
       </div>
     </div>
@@ -34,4 +37,6 @@ function PizzaCart({ pizza, quantity, onQuantityChange }) {
 }
 
 export default PizzaCart;
+
+
 
