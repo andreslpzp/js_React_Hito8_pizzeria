@@ -1,17 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react';
-import PizzaCart from '../Components/PizzaCart';
+import CardPizza from '../Components/CardPizza';
 import { CartContext } from '../Context/CartContext';
 import '../assets/CSS/Cart.css';
 
 const Cart = () => {
   const [pizzas, setPizzas] = useState([]);
   const { cart, removeFromCart, addToCart, totalPrice } = useContext(CartContext);
-
-  // Crea un mapa para acceder rápidamente a las cantidades de cada pizza en el carrito
-  const cartMap = cart.reduce((acc, pizza) => {
-    acc[pizza.id] = pizza.quantity;
-    return acc;
-  }, {});
 
   // Fetch pizzas from the API
   useEffect(() => {
@@ -47,10 +41,10 @@ const Cart = () => {
       <h1 className="titulo">Tu carrito de compras</h1>
       <div className="pizza-list">
         {pizzas.map((pizza) => (
-          <PizzaCart
+          <CardPizza
             key={pizza.id}
             pizza={pizza}
-            quantity={cartMap[pizza.id] || 0} // Usa la cantidad del carrito o 0 si no está en el carrito
+            quantity={cart.find(item => item.id === pizza.id)?.quantity || 0}
             onQuantityChange={handleQuantityChange}
           />
         ))}
@@ -72,6 +66,7 @@ const Cart = () => {
 };
 
 export default Cart;
+
 
 
 
