@@ -8,35 +8,32 @@ import Pizza from "./Pages/Pizza";
 import Profile from "./Pages/Profile";
 import NotFound from "./Components/NotFound";
 import Footer from "./Components/Footer";
-import { useState } from 'react';
+import { CartProvider } from "./Context/CartContext";  // Importa el CartProvider
 
 function App() {
-  const [cart, setCart] = useState([]);
-
-  const addToCart = (pizza) => {
-    setCart((prevCart) => [...prevCart, pizza]);
-  };
-
   return (
-    <Router>
-      <div>
-        <Navbar total={cart.reduce((acc, pizza) => acc + pizza.price * pizza.quantity, 0)} />
-        <Routes>
-          <Route path="/" element={<Home addToCart={addToCart} />} />
-          <Route path="/Register" element={<Register />} />
-          <Route path="/Login" element={<Login />} />
-          <Route path="/Cart" element={<Cart cart={cart} setCart={setCart} />} />
-          <Route path="/Pizza/:id" element={<Pizza />} />
-          <Route path="/Profile" element={<Profile />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-        <Footer />
-      </div>
-    </Router>
+    <CartProvider>  {/* Envuelve toda la aplicación dentro del CartProvider */}
+      <Router>
+        <div>
+          <Navbar />  {/* Ya no es necesario pasar el prop total, lo obtendremos desde el Context */}
+          <Routes>
+            <Route path="/" element={<Home />} />  {/* No es necesario pasar addToCart como prop, lo usaremos desde el Context */}
+            <Route path="/Register" element={<Register />} />
+            <Route path="/Login" element={<Login />} />
+            <Route path="/Cart" element={<Cart />} />  {/* No es necesario pasar cart o setCart como prop */}
+            <Route path="/Pizza/:id" element={<Pizza />} />
+            <Route path="/Profile" element={<Profile />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+          <Footer />
+        </div>
+      </Router>
+    </CartProvider>
   );
 }
 
 export default App;
+
 
 
 

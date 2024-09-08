@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import '../assets/CSS/Navbar.css';
+import { CartContext } from '../Context/CartContext';
 
-const Navbar = ({ total = 0 }) => {
-  const token = false;
+const Navbar = () => {
+  const { totalPrice } = useContext(CartContext);
+  const token = false; // Ajusta según tu lógica de autenticación
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -14,7 +16,7 @@ const Navbar = ({ total = 0 }) => {
   return (
     <nav className="navbar">
       <div className="navbar-left">
-        <h1>Pizzería Mamma Mia!</h1>
+        <h1>Pizzería Napoli</h1>
         <Link to="/">🏠 Home</Link>
         {token ? (
           <>
@@ -29,10 +31,11 @@ const Navbar = ({ total = 0 }) => {
         )}
       </div>
       <div className="navbar-right">
-        <Link to="/Cart">🛒 Total: ${total.toLocaleString()}</Link>
+        <Link to="/Cart">🛒 Total: ${totalPrice.toFixed(2)}</Link>
       </div>
     </nav>
   );
-}
+};
 
 export default Navbar;
+

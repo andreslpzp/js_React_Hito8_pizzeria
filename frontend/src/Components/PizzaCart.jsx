@@ -1,12 +1,16 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../assets/CSS/PizzaCart.css';
 
-function PizzaCart({ pizza, onQuantityChange }) {
-  const [quantity, setQuantity] = useState(0); // Initial quantity set to 0
+function PizzaCart({ pizza, quantity, onQuantityChange }) {
+  const [localQuantity, setLocalQuantity] = useState(quantity); // Initial quantity set to the value passed via props
+
+  useEffect(() => {
+    setLocalQuantity(quantity); // Update local quantity when quantity prop changes
+  }, [quantity]);
 
   const handleQuantityChange = (delta) => {
-    const newQuantity = Math.max(0, quantity + delta); // Ensure minimum quantity is 0
-    setQuantity(newQuantity);
+    const newQuantity = Math.max(0, localQuantity + delta); // Ensure minimum quantity is 0
+    setLocalQuantity(newQuantity);
     onQuantityChange(pizza.id, newQuantity); // Pass pizza ID and new quantity to callback
   };
 
@@ -22,7 +26,7 @@ function PizzaCart({ pizza, onQuantityChange }) {
       <p>Precio: ${pizza.price}</p>
       <div className="quantity-controls">
         <button onClick={() => handleQuantityChange(-1)}>-</button>
-        <span>{quantity}</span>
+        <span>{localQuantity}</span>
         <button onClick={() => handleQuantityChange(1)}>+</button>
       </div>
     </div>
@@ -30,3 +34,4 @@ function PizzaCart({ pizza, onQuantityChange }) {
 }
 
 export default PizzaCart;
+

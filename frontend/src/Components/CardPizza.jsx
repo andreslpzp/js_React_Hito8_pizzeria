@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
-import '../src/assets/CSS/CardPizza.css';
+import React, { useContext } from 'react';
+import { CartContext } from '../Context/CartContext';
+import '../assets/CSS/CardPizza.css';
 
+const CardPizza = ({ pizza }) => {
+  const { addToCart } = useContext(CartContext);
 
-function CardPizza({ pizza }) {
   return (
     <div className="card">
       <img src={pizza.img} alt={pizza.name} />
@@ -14,8 +16,9 @@ function CardPizza({ pizza }) {
         ))}
       </ul>
       <p>Precio: ${pizza.price}</p>
+      <button onClick={() => addToCart(pizza)}>Añadir al carrito</button>
     </div>
   );
-}
+};
 
 export default CardPizza;
