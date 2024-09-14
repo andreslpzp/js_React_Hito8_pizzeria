@@ -2,13 +2,15 @@ import React, { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import '../assets/CSS/Navbar.css';
 import { CartContext } from '../Context/CartContext';
+import { UserContext } from '../Context/UserContext'; // Importamos UserContext
 
 const Navbar = () => {
   const { totalPrice } = useContext(CartContext);
-  const token = false; // Ajusta según tu lógica de autenticación
+  const { token, logout } = useContext(UserContext); // Obtenemos token y logout de UserContext
   const navigate = useNavigate();
 
   const handleLogout = () => {
+    logout(); // Llamamos al método logout del contexto
     alert("Sesión cerrada");
     navigate('/');
   };
@@ -38,4 +40,5 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
 

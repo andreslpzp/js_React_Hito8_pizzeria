@@ -1,10 +1,25 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';  // Importamos useParams
 import { CartContext } from '../Context/CartContext';
 import '../assets/CSS/Pizza.css';
 
-const Pizza = ({ pizza }) => {
-    const { cart, addToCart, removeFromCart } = useContext(CartContext);
-  
+const Pizza = () => {
+  const { id } = useParams();  // Usamos useParams para obtener el ID de la pizza
+  const { cart, addToCart, removeFromCart } = useContext(CartContext);
+  const [pizza, setPizza] = useState(null);
+
+  // Hacemos la petición a la API para obtener los detalles de la pizza
+  useEffect(() => {
+    fetch(`/api/pizzas/${id}`)
+      .then(response => response.json())
+      .then(data => setPizza(data))
+      .catch(error => console.error('Error fetching pizza:', error));
+  }, [id]);
+
+  if (!pizza) {
+    return <p>Cargando...</p>;
+  }
+
   // Check if the pizza is already in the cart
   const pizzaInCart = cart.find(p => p.id === pizza.id) || {};
   const { quantity = 0 } = pizzaInCart; // Default to 0 if pizza is not in the cart
@@ -34,7 +49,6 @@ const Pizza = ({ pizza }) => {
       </div>
       <p className="pizza-description">{pizza.desc}</p>
 
-      {/* Quantity Controls: Left: remove, Center: quantity, Right: add */}
       <div className="quantity-controls">
         <button className="quantity-button" onClick={handleRemoveFromCart} disabled={quantity === 0}>
           - Quitar del carrito
@@ -49,6 +63,7 @@ const Pizza = ({ pizza }) => {
 };
 
 export default Pizza;
+
 
 
 

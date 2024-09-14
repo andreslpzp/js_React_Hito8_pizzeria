@@ -9,30 +9,34 @@ import Profile from "./Pages/Profile";
 import NotFound from "./Components/NotFound";
 import Footer from "./Components/Footer";
 import { CartProvider } from "./Context/CartContext";  // Importa el CartProvider
+import { UserProvider } from "./Context/UserContext";  // Importa el UserProvider
 
 function App() {
   return (
-    <CartProvider>  {/* Envuelve toda la aplicación dentro del CartProvider */}
-      <Router>
-        <div>
-          <Navbar />  {/* Ya no es necesario pasar el prop total, lo obtendremos desde el Context */}
-          <Routes>
-            <Route path="/" element={<Home />} />  {/* No es necesario pasar addToCart como prop, lo usaremos desde el Context */}
-            <Route path="/Register" element={<Register />} />
-            <Route path="/Login" element={<Login />} />
-            <Route path="/Cart" element={<Cart />} />  {/* No es necesario pasar cart o setCart como prop */}
-            <Route path="/Pizza/:id" element={<Pizza />} />
-            <Route path="/Profile" element={<Profile />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-          <Footer />
-        </div>
-      </Router>
-    </CartProvider>
+    <UserProvider>  {/* Envuelve toda la aplicación dentro del UserProvider */}
+      <CartProvider>  {/* Envuelve toda la aplicación dentro del CartProvider */}
+        <Router>
+          <div>
+            <Navbar />  {/* Navbar usará el UserContext */}
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/Register" element={<Register />} />
+              <Route path="/Login" element={<Login />} />
+              <Route path="/Cart" element={<Cart />} />
+              <Route path="/Pizza/:id" element={<Pizza />} />
+              <Route path="/Profile" element={<Profile />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+            <Footer />
+          </div>
+        </Router>
+      </CartProvider>
+    </UserProvider>
   );
 }
 
 export default App;
+
 
 
 

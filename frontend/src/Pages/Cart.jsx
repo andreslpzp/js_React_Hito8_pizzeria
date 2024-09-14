@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useContext } from 'react';
 import CardPizza from '../Components/CardPizza';
 import { CartContext } from '../Context/CartContext';
+import { UserContext } from '../Context/UserContext';  // Importamos UserContext
 import '../assets/CSS/Cart.css';
 
 const Cart = () => {
   const [pizzas, setPizzas] = useState([]);
   const { cart, removeFromCart, addToCart, totalPrice } = useContext(CartContext);
+  const { token } = useContext(UserContext);  // Obtenemos el token del UserContext
 
   // Fetch pizzas from the API
   useEffect(() => {
@@ -59,13 +61,16 @@ const Cart = () => {
         </ul>
 
         <h3>Total a pagar: ${totalPrice.toFixed(2)}</h3>
-        <button className="boton_pago">Pagar</button>
+        <button className="boton_pago" disabled={!token}> {/* Deshabilitamos el botón si no hay token */}
+          Pagar
+        </button>
       </div>
     </div>
   );
 };
 
 export default Cart;
+
 
 
 
