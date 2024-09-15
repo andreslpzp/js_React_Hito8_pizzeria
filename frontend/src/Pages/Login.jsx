@@ -1,11 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { UserContext } from '../Context/UserContext'; // Asegúrate de importar el contexto
+import { Navigate } from 'react-router-dom';
 import '../assets/CSS/Login.css';
 
 const Login = () => {
+    const { token } = useContext(UserContext); // Acceder al contexto
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    let handleSubmit = (e) => {
+    // Redirigir si el token es true
+    if (token) {
+        return <Navigate to="/" />;
+    }
+
+    const handleSubmit = (e) => {
         e.preventDefault();
 
         if (!email || !password) {
@@ -29,23 +37,23 @@ const Login = () => {
                     <form onSubmit={handleSubmit}>
                         <div className="form-group">
                             <label>Email:</label>
-                                <input
-                                    type="email"
-                                    className="form-control"
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
-                                    required
-                                    />
+                            <input
+                                type="email"
+                                className="form-control"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                required
+                            />
                         </div>
                         <div className="form-group">
                             <label>Contraseña:</label>
-                                <input
-                                    type="password"
-                                    className="form-control"
-                                    value={password}
-                                    onChange={(e) => setPassword(e.target.value)}
-                                    required
-                                    />
+                            <input
+                                type="password"
+                                className="form-control"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                required
+                            />
                         </div>
                         <div className='text-center'>
                             <button type="submit" className="btn btn-outline-warning mt-3 fw-bold">Iniciar Sesión</button>
