@@ -8,8 +8,8 @@ import Pizza from "./Pages/Pizza";
 import Profile from "./Pages/Profile";
 import NotFound from "./Components/NotFound";
 import Footer from "./Components/Footer";
-import { CartProvider } from "./Context/CartContext";  // Importa el CartProvider
-import { UserProvider, UserContext } from "./Context/UserContext";  // Importa el UserProvider y UserContext
+import { CartProvider } from "./Context/CartContext";
+import { UserProvider, UserContext } from "./Context/UserContext";
 import { useContext } from 'react';
 
 // Componente de Ruta Protegida
@@ -21,8 +21,6 @@ const ProtectedRoute = ({ element }) => {
 };
 
 function App() {
-  const { token } = useContext(UserContext);
-
   return (
     <UserProvider>  {/* Envuelve toda la aplicación dentro del UserProvider */}
       <CartProvider>  {/* Envuelve toda la aplicación dentro del CartProvider */}
@@ -31,8 +29,8 @@ function App() {
             <Navbar />  {/* Navbar usará el UserContext */}
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/Register" element={token ? <Navigate to="/" /> : <Register />} /> {/* Redirige si está autenticado */}
-              <Route path="/Login" element={token ? <Navigate to="/" /> : <Login />} /> {/* Redirige si está autenticado */}
+              <Route path="/Register" element={<Register />} /> {/* Redirige si está autenticado */}
+              <Route path="/Login" element={<Login />} /> {/* Redirige si está autenticado */}
               <Route path="/Cart" element={<Cart />} />
               <Route path="/Pizza/:id" element={<Pizza />} />
               <Route path="/Profile" element={<ProtectedRoute element={<Profile />} />} /> {/* Ruta protegida */}
@@ -47,7 +45,6 @@ function App() {
 }
 
 export default App;
-
 
 
 

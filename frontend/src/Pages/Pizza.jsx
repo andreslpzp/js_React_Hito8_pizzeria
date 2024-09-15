@@ -6,31 +6,53 @@ import '../assets/CSS/Pizza.css';
 const Pizza = () => {
   const { id } = useParams();  // Usamos useParams para obtener el ID de la pizza
   const { cart, addToCart, removeFromCart } = useContext(CartContext);
-  const [pizza, setPizza] = useState(null);
+  const [pizza, setPizza] = useState(null);  // Estado para almacenar los datos de la pizza
+  const [loading, setLoading] = useState(true);  // Estado para manejar la carga
+  const [error, setError] = useState(null);  // Estado para manejar errores
 
   // Hacemos la petición a la API para obtener los detalles de la pizza
   useEffect(() => {
-    fetch(`/api/pizzas/${id}`)
-      .then(response => response.json())
-      .then(data => setPizza(data))
-      .catch(error => console.error('Error fetching pizza:', error));
+    const fetchPizza = async () => {
+      try {
+        const response = await fetch(`/api/pizzas/${id}`);
+        if (!response.ok) {
+          throw new Error('Error al obtener los datos de la pizza');
+        }
+        const data = await response.json();
+        setPizza(data);
+        setLoading(false);
+      } catch (error) {
+        setError(error.message);
+        setLoading(false);
+      }
+    };
+
+    fetchPizza();
   }, [id]);
 
-  if (!pizza) {
-    return <p>Cargando...</p>;
+  if (loading) {
+    return <p>Cargando...</p>;  // Muestra mensaje de carga mientras se obtiene la pizza
   }
 
-  // Check if the pizza is already in the cart
+  if (error) {
+    return <p>{error}</p>;  // Muestra mensaje de error si la petición falla
+  }
+
+  if (!pizza) {
+    return <p>Pizza no encontrada.</p>;  // Muestra mensaje si la pizza no se encuentra
+  }
+
+  // Verifica si la pizza ya está en el carrito
   const pizzaInCart = cart.find(p => p.id === pizza.id) || {};
-  const { quantity = 0 } = pizzaInCart; // Default to 0 if pizza is not in the cart
+  const { quantity = 0 } = pizzaInCart;  // Por defecto a 0 si la pizza no está en el carrito
 
   const handleAddToCart = () => {
-    addToCart({ ...pizza, quantity: quantity + 1 });
+    addToCart({ ...pizza, quantity: quantity + 1 });  // Añade una unidad de la pizza
   };
 
   const handleRemoveFromCart = () => {
     if (quantity > 0) {
-      removeFromCart(pizza.id);
+      removeFromCart(pizza.id);  // Remueve una unidad de la pizza
     }
   };
 
@@ -63,6 +85,7 @@ const Pizza = () => {
 };
 
 export default Pizza;
+
 
 
 
