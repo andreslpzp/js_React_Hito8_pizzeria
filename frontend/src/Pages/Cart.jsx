@@ -1,13 +1,15 @@
 import React, { useState, useEffect, useContext } from 'react';
 import CardPizza from '../Components/CardPizza';
 import { CartContext } from '../Context/CartContext';
-import { UserContext } from '../Context/UserContext';  // Importamos UserContext
+import { UserContext } from '../Context/UserContext'; // Importamos UserContext
 import '../assets/CSS/Cart.css';
 
 const Cart = () => {
   const [pizzas, setPizzas] = useState([]);
   const { cart, removeFromCart, addToCart, totalPrice } = useContext(CartContext);
-  const { token } = useContext(UserContext);  // Obtenemos el token del UserContext
+  const { token } = useContext(UserContext); // Obtenemos el token del UserContext
+  const [loading, setLoading] = useState(false); // Estado para mostrar si estamos enviando el carrito
+  const [message, setMessage] = useState(null); // Estado para el mensaje de éxito o error
 
   // Fetch pizzas from the API
   useEffect(() => {
@@ -38,6 +40,40 @@ const Cart = () => {
     }
   };
 
+  const handlePayment = async () => {
+    if (!token) {
+      alert("Debes iniciar sesión para realizar el pago.");
+      return;
+    }
+
+    setLoading(true);
+    setMessage(null);
+
+    try {
+      const response = await fetch('http://localhost:5001/api/checkout', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`, // Incluimos el token en la cabecera
+        },
+        body: JSON.stringify({ items: cart }), // Enviamos los items del carrito como un arreglo
+      });
+
+      if (!response.ok) {
+        throw new Error('Error al procesar el pago');
+      }
+
+      const result = await response.json();
+      setMessage("¡Compra realizada con éxito!");
+      console.log("Compra realizada con éxito:", result);
+    } catch (error) {
+      console.error(error);
+      setMessage("Hubo un error al procesar tu compra. Inténtalo de nuevo.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="cart">
       <h1 className="titulo">Tu carrito de compras</h1>
@@ -61,15 +97,22 @@ const Cart = () => {
         </ul>
 
         <h3>Total a pagar: ${totalPrice.toFixed(2)}</h3>
-        <button className="boton_pago" disabled={!token}> {/* Deshabilitamos el botón si no hay token */}
-          Pagar
+        <button
+          className="boton_pago"
+          onClick={handlePayment} // Llamamos a handlePayment al hacer clic
+          disabled={!token || loading} // Deshabilitamos el botón si no hay token o si está cargando
+        >
+          {loading ? "Procesando..." : "Pagar"}
         </button>
+
+        {message && <p>{message}</p>} {/* Mostramos el mensaje de éxito o error */}
       </div>
     </div>
   );
 };
 
 export default Cart;
+
 
 
 

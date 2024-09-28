@@ -1,19 +1,19 @@
 import React, { useState, useContext } from 'react';
-import { UserContext } from '../Context/UserContext'; // Asegúrate de importar el contexto
+import { UserContext } from '../Context/UserContext'; // Importa el UserContext
 import { Navigate } from 'react-router-dom';
 import '../assets/CSS/Login.css';
 
 const Login = () => {
-    const { token } = useContext(UserContext); // Acceder al contexto
+    const { token, login } = useContext(UserContext); // Accede al método login del UserContext
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    // Redirigir si el token es true
+    // Redirigir si ya se está autenticado
     if (token) {
         return <Navigate to="/" />;
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         if (!email || !password) {
@@ -26,7 +26,8 @@ const Login = () => {
             return;
         }
 
-        alert('Inicio de sesión exitoso!');
+        // Llama al método login del UserContext
+        await login(email, password);
     };
 
     return (
@@ -66,3 +67,4 @@ const Login = () => {
 };
 
 export default Login;
+

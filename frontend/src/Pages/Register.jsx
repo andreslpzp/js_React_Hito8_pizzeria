@@ -1,11 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { UserContext } from '../Context/UserContext'; // Importa el UserContext
+import { Navigate } from 'react-router-dom';
 import '../assets/CSS/Login.css'; 
 
-const Login = () => {
+const Register = () => {
+    const { token, register } = useContext(UserContext); // Accede al método register del UserContext
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    let handleSubmit = (e) => {
+    // Redirigir si ya se está autenticado
+    if (token) {
+        return <Navigate to="/" />;
+    }
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         if (!email || !password) {
@@ -18,14 +26,15 @@ const Login = () => {
             return;
         }
 
-        alert('Inicio de sesión exitoso!');
+        // Llama al método register del UserContext
+        await register(email, password);
     };
 
     return (
         <div className="container">
             <div className="card">
                 <div className="card-body">
-                    <h2>Ingresa tu correo y contraseña</h2>
+                    <h2>Registrarse</h2>
                     <form onSubmit={handleSubmit}>
                         <div className="form-group">
                             <label>Email:</label>
@@ -35,7 +44,7 @@ const Login = () => {
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
                                     required
-                                    />
+                                />
                         </div>
                         <div className="form-group">
                             <label>Contraseña:</label>
@@ -45,7 +54,7 @@ const Login = () => {
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
                                     required
-                                    />
+                                />
                         </div>
                         <div className='text-center'>
                             <button type="submit" className="btn btn-outline-warning mt-3 fw-bold">Registrarme</button>
@@ -57,4 +66,5 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default Register;
+
