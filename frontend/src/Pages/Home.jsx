@@ -5,14 +5,15 @@ import fondo_restaurant from '../assets/img/fondo_restaurant.jpg';
 
 function Home() {
   const [pizzas, setPizzas] = useState([]);
-  const [error, setError] = useState(null); // State to handle errors
+  const [error, setError] = useState(null); // Estado para manejar errores
+  const [loading, setLoading] = useState(true); // Estado para manejar la carga
 
   // Fetches all pizzas initially
   useEffect(() => {
     const fetchPizzas = async () => {
       try {
         const response = await fetch('http://localhost:5001/api/pizzas');
-        
+
         // Check if the response is OK
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
@@ -30,6 +31,8 @@ function Home() {
       } catch (error) {
         console.error('Error fetching pizzas:', error);
         setError(error.message); // Set the error message
+      } finally {
+        setLoading(false); // Finaliza el estado de carga
       }
     };
 
@@ -41,14 +44,16 @@ function Home() {
       <img src={fondo_restaurant} alt="Fondo del restaurante" className="fondo" />
       <h1 className="titulo">Bienvenido a Pizzería Napoli</h1>
       <div className="pizza-list">
-        {error ? ( // Display error message if there's an error
+        {loading ? ( // Muestra un mensaje de carga si está cargando
+          <p>Cargando pizzas...</p>
+        ) : error ? ( // Muestra mensaje de error si hay un error
           <p>Error: {error}</p>
-        ) : pizzas.length > 0 ? (
+        ) : pizzas.length > 0 ? ( // Muestra las pizzas si hay datos
           pizzas.map((pizza) => (
             <Pizza key={pizza.id} pizza={pizza} />
           ))
         ) : (
-          <p>Cargando pizzas...</p>
+          <p>No se encontraron pizzas.</p> // Mensaje si no hay pizzas
         )}
       </div>
     </div>

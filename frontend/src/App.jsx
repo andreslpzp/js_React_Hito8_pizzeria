@@ -4,7 +4,7 @@ import Home from "./Pages/Home";
 import Register from "./Pages/Register";
 import Login from "./Pages/Login";
 import Cart from "./Pages/Cart";
-import Pizza from "./Pages/Pizza";
+import Pizza from "./Pages/Pizza"; // Asegúrate de importar correctamente el componente
 import Profile from "./Pages/Profile";
 import NotFound from "./Components/NotFound";
 import Footer from "./Components/Footer";
@@ -37,17 +37,20 @@ function App() {
             <Navbar />  {/* Navbar usará el UserContext */}
             <Routes>
               <Route path="/" element={<Home />} />
-              
+
               {/* Si el usuario está autenticado, redirige a Home */}
               <Route path="/Register" element={<AuthRoute element={<Register />} />} />
               <Route path="/Login" element={<AuthRoute element={<Login />} />} />
 
+              {/* Ruta de carrito */}
               <Route path="/Cart" element={<Cart />} />
+
+              {/* Ruta para Pizza con el ID dinámico */}
               <Route path="/Pizza/:id" element={<Pizza />} />
-              
+
               {/* Ruta protegida para el perfil */}
               <Route path="/Profile" element={<ProtectedRoute element={<Profile />} />} />
-              
+
               {/* Página 404 */}
               <Route path="*" element={<NotFound />} />
             </Routes>
@@ -60,6 +63,7 @@ function App() {
 }
 
 export default App;
+
 
 
 
