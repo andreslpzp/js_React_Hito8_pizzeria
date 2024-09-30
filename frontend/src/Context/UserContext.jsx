@@ -9,7 +9,7 @@ export const UserProvider = ({ children }) => {
   // Método para hacer login
   const login = async (email, password) => {
     try {
-      const res = await fetch("/api/auth/login", {
+      const res = await fetch("http://localhost:5001/api/auth/login", { // Cambiado a puerto 5001
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
@@ -18,6 +18,7 @@ export const UserProvider = ({ children }) => {
       if (res.ok) {
         setToken(data.token);  // Guardar el token JWT
         setEmail(data.email);  // Guardar el email del usuario
+        localStorage.setItem('token', data.token); // Opcional: almacenar el token en localStorage
       } else {
         console.error("Error en login:", data.message);
       }
@@ -29,7 +30,7 @@ export const UserProvider = ({ children }) => {
   // Método para hacer registro
   const register = async (email, password) => {
     try {
-      const res = await fetch("/api/auth/register", {
+      const res = await fetch("http://localhost:5001/api/auth/register", { // Cambiado a puerto 5001
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
@@ -38,6 +39,7 @@ export const UserProvider = ({ children }) => {
       if (res.ok) {
         setToken(data.token);  // Guardar el token JWT
         setEmail(data.email);  // Guardar el email del usuario
+        localStorage.setItem('token', data.token); // Opcional: almacenar el token en localStorage
       } else {
         console.error("Error en registro:", data.message);
       }
@@ -50,6 +52,7 @@ export const UserProvider = ({ children }) => {
   const logout = () => {
     setToken(null);  // Eliminar el token al hacer logout
     setEmail(null);  // Eliminar el email al hacer logout
+    localStorage.removeItem('token'); // Opcional: eliminar el token del localStorage
   };
 
   return (

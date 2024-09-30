@@ -20,6 +20,14 @@ const ProtectedRoute = ({ element }) => {
   return token ? element : <Navigate to="/Login" />;
 };
 
+// Componente para rutas de Login y Registro (redirigir si el usuario ya está autenticado)
+const AuthRoute = ({ element }) => {
+  const { token } = useContext(UserContext);
+
+  // Si el token es true, redirige a Home
+  return token ? <Navigate to="/" /> : element;
+};
+
 function App() {
   return (
     <UserProvider>  {/* Envuelve toda la aplicación dentro del UserProvider */}
@@ -29,11 +37,18 @@ function App() {
             <Navbar />  {/* Navbar usará el UserContext */}
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/Register" element={<Register />} /> {/* Redirige si está autenticado */}
-              <Route path="/Login" element={<Login />} /> {/* Redirige si está autenticado */}
+              
+              {/* Si el usuario está autenticado, redirige a Home */}
+              <Route path="/Register" element={<AuthRoute element={<Register />} />} />
+              <Route path="/Login" element={<AuthRoute element={<Login />} />} />
+
               <Route path="/Cart" element={<Cart />} />
               <Route path="/Pizza/:id" element={<Pizza />} />
-              <Route path="/Profile" element={<ProtectedRoute element={<Profile />} />} /> {/* Ruta protegida */}
+              
+              {/* Ruta protegida para el perfil */}
+              <Route path="/Profile" element={<ProtectedRoute element={<Profile />} />} />
+              
+              {/* Página 404 */}
               <Route path="*" element={<NotFound />} />
             </Routes>
             <Footer />
@@ -45,6 +60,7 @@ function App() {
 }
 
 export default App;
+
 
 
 

@@ -7,6 +7,8 @@ const Login = () => {
     const { token, login } = useContext(UserContext); // Accede al método login del UserContext
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [loading, setLoading] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
 
     // Redirigir si ya se está autenticado
     if (token) {
@@ -15,19 +17,29 @@ const Login = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setErrorMessage(''); // Reinicia el mensaje de error
 
         if (!email || !password) {
-            alert('Todos los campos son obligatorios.');
+            setErrorMessage('Todos los campos son obligatorios.');
             return;
         }
 
         if (password.length < 6) {
-            alert('La contraseña debe tener al menos 6 caracteres.');
+            setErrorMessage('La contraseña debe tener al menos 6 caracteres.');
             return;
         }
 
-        // Llama al método login del UserContext
-        await login(email, password);
+        setLoading(true); // Inicia el estado de carga
+
+        try {
+            await login(email, password);
+            // Aquí podrías redirigir a otra página si lo deseas
+        } catch (error) {
+            setErrorMessage('Error en inicio de sesión. Verifica tus credenciales.'); // Mensaje de error genérico
+            console.error(error); // Para depuración
+        } finally {
+            setLoading(false); // Finaliza el estado de carga
+        }
     };
 
     return (
@@ -35,6 +47,7 @@ const Login = () => {
             <div className="card">
                 <div className="card-body">
                     <h2>Inicio de Sesión</h2>
+                    {errorMessage && <p className="text-danger">{errorMessage}</p>}
                     <form onSubmit={handleSubmit}>
                         <div className="form-group">
                             <label>Email:</label>
@@ -57,7 +70,13 @@ const Login = () => {
                             />
                         </div>
                         <div className='text-center'>
-                            <button type="submit" className="btn btn-outline-warning mt-3 fw-bold">Iniciar Sesión</button>
+                            <button 
+                                type="submit" 
+                                className="btn btn-outline-warning mt-3 fw-bold" 
+                                disabled={loading}
+                            >
+                                {loading ? 'Cargando...' : 'Iniciar Sesión'}
+                            </button>
                         </div>
                     </form>
                 </div>
@@ -67,4 +86,3 @@ const Login = () => {
 };
 
 export default Login;
-
