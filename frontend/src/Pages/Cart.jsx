@@ -42,7 +42,12 @@ const Cart = () => {
 
   const handlePayment = async () => {
     if (!token) {
-      alert("Debes iniciar sesión para realizar el pago.");
+      alert("Debes iniciar sesión para realizar el pago."); // Mensaje si no está logueado
+      return;
+    }
+
+    if (cart.length === 0) {
+      setMessage("Debes agregar al menos una pizza al carro."); // Mensaje si el carrito está vacío
       return;
     }
 
@@ -50,13 +55,13 @@ const Cart = () => {
     setMessage(null);
 
     try {
-      const response = await fetch('http://localhost:5001/api/checkout', {
+      const response = await fetch('http://localhost:5001/api/checkouts', { // Cambia la URL a /api/checkouts
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`, // Incluimos el token en la cabecera
         },
-        body: JSON.stringify({ items: cart }), // Enviamos los items del carrito como un arreglo
+        body: JSON.stringify({ cart }), // Enviamos los items del carrito como un arreglo
       });
 
       if (!response.ok) {
@@ -64,7 +69,11 @@ const Cart = () => {
       }
 
       const result = await response.json();
-      setMessage("¡Compra realizada con éxito!");
+      setMessage("Compra realizada con éxito. Te actualizaremos por WhatsApp y por correo sobre el estado de tu pedido.");
+      
+      // Restablecer las cantidades de los productos en el carrito a 0
+      cart.forEach(pizza => removeFromCart(pizza.id)); 
+
       console.log("Compra realizada con éxito:", result);
     } catch (error) {
       console.error(error);
